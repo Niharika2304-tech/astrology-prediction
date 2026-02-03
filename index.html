@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Get personalized astrology predictions based on your birth details">
+  <title>Astrology Prediction - Get Your Personalized Reading</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <section>
+      <h1>Astrology Prediction</h1>
+      <p>Enter your details below to receive your personalized astrology reading</p>
+      
+      <form 
+        id="astrologyForm"
+        action="https://nksaro.app.n8n.cloud/webhook-test/6f2cc6a0-349d-4e60-8780-638e983e6453"
+        method="POST"
+      >
+        <!-- Full Name (required) -->
+        <div>
+          <label for="fullName">Full Name<span>*</span></label>
+          <input
+            type="text"
+            id="fullName"
+            name="fullName"
+            required
+            placeholder="Enter your full name"
+          />
+        </div>
+
+        <!-- Date of Birth (required) -->
+        <div>
+          <label for="dateOfBirth">Date of Birth<span>*</span></label>
+          <input
+            type="date"
+            id="dateOfBirth"
+            name="dateOfBirth"
+            required
+          />
+        </div>
+
+        <!-- Place of Birth (required) -->
+        <div>
+          <label for="placeOfBirth">Place of Birth<span>*</span></label>
+          <input
+            type="text"
+            id="placeOfBirth"
+            name="placeOfBirth"
+            required
+            placeholder="City, Country"
+          />
+        </div>
+
+        <!-- Area of Focus (required dropdown) -->
+        <div>
+          <label for="areaOfFocus">Area of Focus<span>*</span></label>
+          <select
+            id="areaOfFocus"
+            name="areaOfFocus"
+            required
+          >
+            <option value="" disabled selected>Select an area</option>
+            <option value="Career">Career</option>
+            <option value="Health">Health</option>
+            <option value="Relationships">Relationships</option>
+          </select>
+        </div>
+
+        <!-- Email Address (required) -->
+        <div>
+          <label for="email">Email Address<span>*</span></label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            placeholder="your.email@example.com"
+          />
+        </div>
+
+        <!-- Time of Birth (optional) -->
+        <div>
+          <label for="timeOfBirth">Time of Birth (optional)</label>
+          <input
+            type="time"
+            id="timeOfBirth"
+            name="timeOfBirth"
+          />
+        </div>
+
+        <!-- Gender (optional dropdown) -->
+        <div>
+          <label for="gender">Gender (optional)</label>
+          <select
+            id="gender"
+            name="gender"
+          >
+            <option value="" selected>Prefer not to say</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+
+        <!-- Submit button -->
+        <div>
+          <button type="submit">Get My Prediction</button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <!-- Response popup -->
+  <div id="responsePopup" class="popup-overlay" aria-hidden="true">
+    <div class="popup">
+      <div class="popup-header">
+        <h2>Your Astrology Prediction</h2>
+        <button type="button" id="closePopup" class="popup-close" aria-label="Close">×</button>
+      </div>
+      <div id="popupContent" class="popup-content"></div>
+    </div>
+  </div>
+
+  <!-- Loading overlay (shown while waiting for webhook) -->
+  <div id="loadingOverlay" class="loading-overlay" aria-hidden="true">
+    <div class="loading-spinner"></div>
+    <p>Getting your prediction...</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

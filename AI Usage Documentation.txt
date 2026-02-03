@@ -1,0 +1,78 @@
+AI Usage Documentation
+Purpose of Using AI
+
+AI was used in this project to simulate an astrology expert who generates personalized, structured, and readable predictions based on user-provided birth details. The goal is to demonstrate ethical, transparent, and guided use of AI, not to replace human judgment.
+
+AI Tools Used
+
+Cursor AI
+Used during frontend development for:
+
+Writing and refining HTML, CSS, and JavaScript code
+
+Improving form validation and UI structure
+
+Debugging layout and client-side logic
+
+Large Language Model (LLM) via n8n
+Used in the backend workflow to:
+
+Act as an AI astrologer
+
+Generate astrology-based predictions from structured user input
+
+How AI Is Integrated
+
+User submits astrological details through the frontend form.
+
+The form sends validated data to an n8n webhook.
+
+n8n passes the structured data to an LLM node with a carefully designed prompt.
+
+The AI generates predictions in a controlled, non-absolute format.
+
+Predictions are emailed to the user via n8n.
+
+Prompt Design & Control
+
+The prompt instructs the AI to:
+
+Avoid extreme, harmful, or deterministic statements
+
+Use neutral, guidance-based language
+
+Structure output under clear headings (Career, Health, Relationships, etc.)
+
+Include a disclaimer stating predictions are for guidance only
+
+Input data is clearly labeled to reduce ambiguity and hallucinations.
+
+Human Oversight & Responsibility
+
+AI outputs are not treated as factual or medical advice.
+
+Predictions are framed as general guidance, not guaranteed outcomes.
+
+The system includes a disclaimer emphasizing that astrology predictions are informational only.
+
+The project demonstrates human control over prompt design, workflow logic, and output usage.
+
+Ethical & Responsible AI Practices
+
+No sensitive or unnecessary personal data is collected.
+
+User data is used only for generating predictions and sending emails.
+
+AI decisions are transparent through documented prompts and workflows.
+
+Users are informed that predictions are AI-generated.
+
+Limitations & Assumptions
+
+Predictions are generalized and not scientifically verified.
+
+Accuracy depends entirely on user-provided input.
+
+The AI does not replace professional astrologers or expert advice.
+
+Time of birth and gender are treated as optional inputs.

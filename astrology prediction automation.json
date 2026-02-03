@@ -1,0 +1,146 @@
+{
+  "name": "astrology prediction automation",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "6f2cc6a0-349d-4e60-8780-638e983e6453",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "7b8ddfd3-d36a-4b78-8abc-22c70d3601c4",
+      "name": "Webhook",
+      "webhookId": "6f2cc6a0-349d-4e60-8780-638e983e6453"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-5-mini",
+          "mode": "list",
+          "cachedResultName": "GPT-5-MINI"
+        },
+        "responses": {
+          "values": [
+            {
+              "content": "=please predict the astrology based on the provided configuration,\nfull name:{{ $json.body.fullName }}\ndateofbirth:{{ $json.body.dateOfBirth }}\nplaceofbirth:{{ $json.body.placeOfBirth }}\nareaofFocus:{{ $json.body.areaOfFocus }}\nemail:{{ $json.body.email }}\ntimeofbirth:{{ $json.body.timeOfBirth }}\ngender:{{ $json.body.gender }}"
+            },
+            {
+              "role": "system",
+              "content": "act as astologer expert who specializes in predicting astrology to the users considering configurations they want\nthe city is pune\neven if you find any constraints while while predicting the astrology,still go ahead with the suggestions\nthe output format should be:\nname/Zodiac sign:"
+            }
+          ]
+        },
+        "builtInTools": {},
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 2.1,
+      "position": [
+        208,
+        0
+      ],
+      "id": "a830b65b-b714-464a-97d2-7a98a27068c2",
+      "name": "Message a model",
+      "credentials": {
+        "openAiApi": {
+          "id": "lqZlhVrSELnTbLTt",
+          "name": "n8n free OpenAI API credits"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "nksaro23@gmail.com",
+        "subject": "Zodiac sign",
+        "emailType": "text",
+        "message": "=Hi, here is your name and zodiac sign \n\n{{ $json.output[0].content[0].text }}\n\nregards",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        560,
+        0
+      ],
+      "id": "07351589-e4ff-47a1-a1ce-0aad89490aff",
+      "name": "Send a message",
+      "webhookId": "b3b45adc-5b10-4009-8107-a1fe641a657f",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "dpRVSF9mQq17UPTA",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $('Message a model').item.json.output[0].content[0].text }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        768,
+        0
+      ],
+      "id": "a72a39da-01bd-42ef-921b-7a47c577a9e9",
+      "name": "Respond to Webhook"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Message a model",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Message a model": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "availableInMCP": false
+  },
+  "versionId": "98ea60f8-3fec-4124-b380-fa813ad1d46a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1e3a8830b803bff5ee690ce33f43a45d4839de2884f8a9851edd76767d6ff308"
+  },
+  "id": "nEr_PxQVsuIN2kMuLPOX9",
+  "tags": []
+}
